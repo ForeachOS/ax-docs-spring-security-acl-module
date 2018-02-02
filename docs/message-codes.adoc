@@ -1,0 +1,121 @@
+== Message codes
+The following lists the common message codes that SpringSecurityAclModule uses.
+
+[[acl-permissions-form-message-codes]]
+=== ACL permissions form
+Message codes for ACL permissions form that can be configured if EntityModule is active.
+The default created ACL permissions form view name is *aclPermissions*.
+
+The following parameters are used in the generated message code:
+
+*ViewPrefix*::
+Is the message code prefix for the ACL permissions view.
+Usually of the form *EntityPrefix*.views[*viewName*]. +
++
+The *viewName* is the name of the ACL permissions form view.
+Usually this is `aclPermissions` when using the `AclPermissionsFormRegistry`. +
++
+Please refer to the link:{entity-module-url}[EntityModule] documentation for the generated values of *EntityPrefix*.
+
+*formName*::
+Value of the `name` property configured on the `AclPermissionsForm`.
+If you did not explicitly set one, the value will be `default`.
+
+*sectionName*::
+Name of the `AclPermissionsFormSection` that the message is for.
+Should always be set.
+
+*FormPrefix*::
+Represents the combination: *ViewPrefix*.aclForm[*formName*]
+
+*SectionPrefix*::
+Represents the combination: *ViewPrefix*.aclSection[*sectionName*]
+
+*SectionInFormPrefix*::
+Represents the combination: *ViewPrefix*.aclForm[*formName*].aclSection[*sectionName*]
+
+*permissionName*::
+Name of the `AclPermission` under which it is registered in the `AclPermissionFactory`, for example `read`.
+See the <<known-acl-permissions,known ACL permissions>> for all default permissions.
+
+*permissionGroup*::
+Name of the permission group on a form section.
+
+.ACL Permission form message codes (in resolving order)
+[cols="1,4"]
+|===
+|Message code |Description
+
+|*SectionInFormPrefix*.title +
+*SectionPrefix*.title
+|Title of the section. +
+ +
+Example: `(ViewPrefix).aclForm[general].aclSection[user].title`
+
+|*SectionInFormPrefix*.description +
+*SectionPrefix*.description
+|Description of the section. +
+ +
+Example: `(ViewPrefix).aclForm[general].aclSection[user].description`
+
+|*SectionInFormPrefix*.permissionGroup[*permissionGroup*] +
+*SectionPrefix*.permissionGroup[*permissionGroup*]
+*FormPrefix*.permissionGroup[*permissionGroup*]
+|Label for that permission group.
+Only if the permission group had a name assigned. +
+ +
+Example: `(ViewPrefix).aclForm[general].aclSection[user].permissionGroup[projects]`
+
+|*SectionInFormPrefix*.permissionGroup[*permissionGroup*].tooltip +
+*SectionPrefix*.permissionGroup[*permissionGroup*].tooltip
+*FormPrefix*.permissionGroup[*permissionGroup*].tooltip
+|Description (optional tooltip) for that permission group.
+Only if the permission group had a name assigned. +
+ +
+Example: `(ViewPrefix).aclForm[general].aclSection[user].permissionGroup[projects].description`
+
+|*SectionInFormPrefix*.permission[*permissionName*] +
+*SectionPrefix*.permission[*permissionName*]
+*FormPrefix*.permission[*permissionName*]
+|Label for that permission. +
+ +
+Example: `(ViewPrefix).aclForm[general].aclSection[user].permission[create]`
+
+|*SectionInFormPrefix*.permission[*permissionName*].tooltip +
+*SectionPrefix*.permission[*permissionName*].tooltip
+*FormPrefix*.permission[*permissionName*].tooltip
+|Description (optional tooltip) for that permission. +
+ +
+Example: `(ViewPrefix).aclForm[general].aclSection[user].permission[create].description`
+
+|*SectionInFormPrefix*.removeEntry +
+*SectionPrefix*.removeEntry
+*FormPrefix*.removeEntry
+|Title of the button to remove an entry. +
+ +
+Example: `(ViewPrefix).aclForm[general].aclSection[user].removeEntry`
+
+|*SectionInFormPrefix*.noEntries +
+*SectionPrefix*.noEntries
+*FormPrefix*.noEntries
+|Text shown if there are no specific entries with permissions. +
+ +
+Example: `(ViewPrefix).aclForm[general].aclSection[user].noEntries`
+
+|*ViewPrefix*.properties.*propertyName*
+|Label for the property that represents the new item selector.
+This is usually the entity name of the type of entity that would be selected. +
+ +
+Example: `(EntityPrefix).views[aclPermissions].properties.user`
+
+|*ViewPrefix*.feedback.permissionsUpdated
+|Message shown after permissions have been saved. +
+ +
+Example: `(EntityPrefix).views[aclPermissions].feedback.permissionsUpdated`
+
+
+|===
+
+
+
+
