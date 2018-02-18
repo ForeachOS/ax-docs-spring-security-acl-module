@@ -7,6 +7,7 @@ Arne Vandamme
 :module-name: SpringSecurityAclModule
 :module-artifact: spring-security-acl-module
 :module-url: https://across.foreach.be/modules/SpringSecurityAclModule
+:module-javadoc-url: https://across-docs.foreach.be/across-standard-modules/SpringSecurityAclModule/3.0.0-SNAPSHOT/javadoc
 :entity-module-url: https://across.foreach.be/modules/EntityModule
 
 [copyright,verbatim]
@@ -84,7 +85,7 @@ When creating an ACL, the current authentication will be set as it's owner and w
 
 [#default-parent-acl]
 === Default parent ACL
-The `AclSecurityService` optionally allows setting a default parent ACL (in the form of the `IdBasedEntity`
+The <<acl-security-service,`AclSecurityService`>> optionally allows setting a default parent ACL (in the form of the `IdBasedEntity`
 that owns the ACL).  The default parent is attached to any newly created ACL that does not have an explicit parent
 specified.
 
@@ -176,6 +177,10 @@ public class MyApplicationPermissions {
 
 === Managing ACLs
 
+[[acl-security-service]]
+==== AclSecurityService
+The link:{module-javadoc-url}/com/foreach/across/modules/spring/security/acl/services/AclSecurityService.html[`AclSecurityService`] provides an abstraction layer for working with ACLs for IdBasedEntities.
+
 ==== IdBasedEntityAclInterceptor
 {module-name} provides a custom interceptor that provides a few utility methods to handle ACLs for `IdBasedEntity` types.
 These are primarily used to create an ACL when an object of a certain type is created, as well as providing access to the object for the necessary security entities by defaul.
@@ -211,11 +216,7 @@ class ProjectAclInterceptor extends IdBasedEntityAclInterceptor<Project> {
 ----
 
 //TODO
-==== AclSecurityService
-//
-//allow-revoke-deny-hasPermission
-//
-==== Defining access using AllowableActions
+//==== Defining access using AllowableActions
 //
 //AllowableActionsMapper
 
