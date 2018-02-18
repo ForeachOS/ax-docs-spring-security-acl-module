@@ -78,7 +78,7 @@ with the ACLs is the `AclSecurityService` and supports management of ACLs attach
 seamlessly integrating with other standard modules.
 
 ACLs define which security entities have access to a certain object or type through the use of Access Control Entries (ACE).
-An ACE defines access for a single <<acl-permission,acl permission>> for a certain `Sid`, which represents the security entity.
+An ACE defines access for a single <<known-acl-permissions,acl permission>> for a certain `Sid`, which represents the security entity.
 {module-name} provides an `Sid` implementation for working with `GrantedAuthority` and `SecurityPrincipal`, which are `GrantedAuthoritySid` and `SecurityPrincipalSid` respectively.
 When creating an ACL, the current authentication will be set as it's owner and will be the default manager of the ACL for that object.
 
@@ -156,7 +156,6 @@ To create your own ACL permission, simply use the AclPermission#create method, w
 After creating your custom permissions, you register them to the AclPermissionFactory and you're set to use them in your application.
 
 In general it's a good idea to keep your custom ACL permissions in a single location within your application.
-include::message-codes.adoc[]
 
 // TODO CumulativePermission
 .Registering a custom ACL permission
@@ -196,7 +195,7 @@ public class MyApplicationPermissions {
 To create an ACL form through which users can manage ACL's from the back-end of the application, one has to register a form on the AclPermissionFormRegistry and add that form to the EntityConfigurationBuilder of your entity.
 The ACL form allows to split up the handling of permissions in logical sections and groups.
 This will not affect on how permissions are handled underlying, but offers a clearer user interface.
-When creating AclPermissionsFormSections, most options can be left open and sensible defaults will be generated.
+When creating `AclPermissionsFormSection`s, most options can be left open and sensible defaults will be generated.
 
 .Registering an AclPermissionsForm
 [source,java,indent=0]
@@ -238,5 +237,5 @@ public void configure(EntitiesConfigurationBuilder entities){
 }
 ----
 
-
+include::message-codes.adoc[]
 
