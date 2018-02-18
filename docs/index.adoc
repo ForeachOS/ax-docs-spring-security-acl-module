@@ -176,17 +176,46 @@ public class MyApplicationPermissions {
 
 === Managing ACLs
 
-//TODO
+==== IdBasedEntityAclInterceptor
+{module-name} provides a custom interceptor that provides a few utility methods to handle ACLs for `IdBasedEntity` types.
+These are primarily used to create an ACL when an object of a certain type is created, as well as providing access to the object for the necessary security entities by defaul.
 
-//==== IdBasedEntityAclInterceptor
-//
-//Custom interceptor basesd on EntityInterceptorAdapter that provides common methods to handle ACLs
-//
-//==== AclSecurityService
+.Creating a custom Acl interceptor.
+[source,java,indent=0]
+[subs="verbatim,quotes,attributes"]
+----
+@Component
+class ProjectAclInterceptor extends IdBasedEntityAclInterceptor<Project> {
+    @Override
+    public boolean handles( Class<?> entityClass ) {
+        return Project.class.isAssignableFrom( entityClass );
+    }
+
+    @Override
+    public void afterCreate( Project entity ) {
+        if ( aclSecurityService().getAcl( entity ) == null ) {
+            aclSecurityService().createAcl( entity );
+            // All users that have the MANAGE_USERS authority, will have the READ and WRITE permissions for the project instance.
+            aclSecurityService().allow( UserAuthorities.MANAGE_USERS, entity, AclPermission.READ, AclPermission.WRITE );
+        }
+    }
+
+    @Override
+    public void beforeDelete( Project entity ) {
+        Acl acl = aclSecurityService().getAcl( entity );
+        if ( acl != null ) {
+            aclSecurityService().deleteAcl( entity, true );
+        }
+    }
+}
+----
+
+//TODO
+==== AclSecurityService
 //
 //allow-revoke-deny-hasPermission
 //
-//==== Defining access using AllowableActions
+==== Defining access using AllowableActions
 //
 //AllowableActionsMapper
 
