@@ -1,0 +1,14 @@
+= 3.x.x release notes
+
+[#3-0-1]
+== 3.0.1.RELEASE
+* SpringSecurityAclModule now uses a single `AclPermissionFactory` for the actual permission management
+** custom permissions can be registered on this factory and made available for use in security expressions
+* the first 10 permission positions (bit flags) are now reserved for Across internal use
+** the 5 default permissions take up half of these positions
+** applications or non-shared modules should create custom permissions on the positions > 10
+* `AclPermission` has some helper methods for easily creating custom permissions: `create()` and `combine()`, with validation regarding the reserved bit range
+* TODO: AclPermissionForm
+** registry for registration
+** ObjectIdentity.class.getName() attribute for custom identity resolver
+** the auto generated ACL permissions management view uses several <<acl-permissions-form-message-codes,message codes>> for its labels

@@ -1,0 +1,5 @@
+= 2.x.x release notes
+
+[#2-0-1]
+== 2.0.1.RELEASE
+* added support for H2 database

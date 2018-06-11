@@ -1,0 +1,12 @@
+= ACL security entities
+
+The `SpringSecurityAclModule` packs a domain model for ACL security entities.  These are abstract database entities
+that serve no other purpose than attaching an ACL to them.  They optionally take another security entity as parent,
+whose ACL will then also be the parent ACL.
+
+The ACL security entity hierarchy exactly represents the backing ACL hierarchy.  ACL security entities are usually
+only developer managed and by default require the *acl take ownership* permissions to manage them through the
+administrative interface.
+
+The standard `UserModule` provides a default installation of security entities, and sets the *system* security entity
+for the default parent ACL.

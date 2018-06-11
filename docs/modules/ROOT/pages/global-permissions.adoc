@@ -1,0 +1,20 @@
+= Global permissions
+
+The `SpringSecurityAclModule` defines 3 global permissions, these are available as constants in the `AclAuthorities` interface.
+
+.Global permission overview
+|===
+|Permission |Description
+
+|*acl take ownership*
+|Allows the authenticated principal to take ownership of any ACL. Also the required permission to be able
+to manage ACL security entities.
+
+|*acl modify*
+|Allows the authenticated principal to modify any ACL.  This includes adding and removing ACE records but
+excludes changing ownership.
+
+|*acl audit*
+|Allows the authenticated principal to modify the auditing settings of an ACL.
+
+|===

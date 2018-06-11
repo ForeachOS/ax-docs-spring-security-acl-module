@@ -1,0 +1,55 @@
+= ACL permissions
+
+[#known-permissions]
+== Known ACL permissions
+The following lists the known/used ACL permissions from shared modules.
+
+An ACL permission:
+
+* takes a single bit position (total range is numbered from 0 to 31)
+* optionally has a single character code that is used when displaying a permission pattern (eg. `\...\...\...\...\...\...\...\...\....D.WR`)
+* has a unique name that can be used in expression based security (eg. `hasPermission(#object,'my-permission')`)
+
+[discrete]
+=== Reserved bit range
+The first 10 bit positions are reserved for use by Across standard modules.
+To avoid conflicts with this range, use `AclPermission.create()` for defining your custom permissions.
+
+|===
+|Bit position |Permission name |Code |Module
+
+|0 |read | R |SpringSecurityAclModule
+|1 |write |W |SpringSecurityAclModule
+|2 |create |C |SpringSecurityAclModule
+|3 |delete |D |SpringSecurityAclModule
+|4 |administration |A |SpringSecurityAclModule
+
+|===
+
+=== Open bit range
+The open bit range (> position 10) is meant for custom applications or modules.
+
+[#creating-permissions]
+=== Creating custom ACL permissions
+
+To create your own ACL permission, simply use the AclPermission#create method, which accepts an integer definition it's bit position.
+After creating your custom permissions, you register them to the AclPermissionFactory and you're set to use them in your application.
+
+In general it's a good idea to keep your custom ACL permissions in a single location within your application.
+
+// TODO CumulativePermission
+.Registering a custom ACL permission
+[source,java,indent=0]
+[subs="verbatim,quotes,attributes"]
+----
+@Configuration
+public class MyApplicationPermissions {
+
+    public static final AclPermission MY_CUSTOM_PERMISSION = AclPermission.create(10);
+
+    @Autowired
+    void registerPermissions(AclPermissionFactory permissionFactory){
+        permissionFactory.registerPermission( MY_CUSTOM_PERMISSION, "my-custom-permission" );
+    }
+}
+----

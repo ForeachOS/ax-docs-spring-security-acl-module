@@ -1,8 +1,9 @@
-== Message codes
+= Message codes
+
 The following lists the common message codes that SpringSecurityAclModule uses.
 
 [[acl-permissions-form-message-codes]]
-=== ACL permissions form
+== ACL permissions form
 Message codes for ACL permissions form that can be configured if EntityModule is active.
 The default created ACL permissions form view name is *aclPermissions*.
 

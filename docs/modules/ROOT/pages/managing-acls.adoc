@@ -1,0 +1,97 @@
+= Managing ACLs
+
+[[acl-security-service]]
+== AclSecurityService
+The link:{module-javadoc-url}/com/foreach/across/modules/spring/security/acl/services/AclSecurityService.html[`AclSecurityService`] provides an abstraction layer for working with ACLs for IdBasedEntities.
+
+[#default-parent-acl]
+== Default parent ACL
+The <<acl-security-service,`AclSecurityService`>> optionally allows setting a default parent ACL (in the form of the `IdBasedEntity`
+that owns the ACL).  The default parent is attached to any newly created ACL that does not have an explicit parent
+specified.
+
+== IdBasedEntityAclInterceptor
+{module-name} provides a custom interceptor that provides a few utility methods to handle ACLs for `IdBasedEntity` types.
+These are primarily used to create an ACL when an object of a certain type is created, as well as providing access to the object for the necessary security entities by defaul.
+
+.Creating a custom Acl interceptor.
+[source,java,indent=0]
+[subs="verbatim,quotes,attributes"]
+----
+@Component
+class ProjectAclInterceptor extends IdBasedEntityAclInterceptor<Project> {
+    @Override
+    public boolean handles( Class<?> entityClass ) {
+        return Project.class.isAssignableFrom( entityClass );
+    }
+
+    @Override
+    public void afterCreate( Project entity ) {
+        if ( aclSecurityService().getAcl( entity ) == null ) {
+            aclSecurityService().createAcl( entity );
+            // All users that have the MANAGE_USERS authority, will have the READ and WRITE permissions for the project instance.
+            aclSecurityService().allow( UserAuthorities.MANAGE_USERS, entity, AclPermission.READ, AclPermission.WRITE );
+        }
+    }
+
+    @Override
+    public void beforeDelete( Project entity ) {
+        Acl acl = aclSecurityService().getAcl( entity );
+        if ( acl != null ) {
+            aclSecurityService().deleteAcl( entity, true );
+        }
+    }
+}
+----
+
+//TODO
+//==== Defining access using AllowableActions
+//
+//AllowableActionsMapper
+
+== Configuring an ACL form
+
+To create an ACL form through which users can manage ACL's from the back-end of the application, one has to register a form on the AclPermissionFormRegistry and add that form to the EntityConfigurationBuilder of your entity.
+The ACL form allows to split up the handling of permissions in logical sections and groups.
+This will not affect on how permissions are handled underlying, but offers a clearer user interface.
+When creating `AclPermissionsFormSection`s, most options can be left open and sensible defaults will be generated.
+
+.Registering an AclPermissionsForm
+[source,java,indent=0]
+[subs="verbatim,quotes,attributes"]
+----
+@Autowired
+void registerAclPermissionsForm(AclPermissionsFormRegistry formRegistry){
+    // Create a section that defines access to the object for users.
+    AclPermissionsFormSection userSection = AclPermissionsForm
+        .section("user") // name of the section
+        .entityType(User.class) // the entity type for which access will be defined
+        .permissionGroups( // define the logical grouping of permissions
+            permissionGroup( "general" ) // name of the group
+                // permissions that should be shown in this group
+                .permissions(AclPermission.CREATE, AclPermission.READ, AclPermission.WRITE, AclPermission.DELETE)
+                .build(),
+            permissionsGroup("administration")
+                .permissions(AclPermission.ADMINISTRATION)
+                .build()
+        ).build();
+
+    // register the form under the name 'project'
+    formRegistry.put("project", AclPermissionsForm.builder()
+                                                  .name("project") // name of the form
+                                                  .section(userSection) // registering the section on the form
+                                                  .build()
+    );
+}
+----
+
+.Registering the form on an EntityConfigurationBuilder
+[source,java,indent=0]
+[subs="verbatim,quotes,attributes"]
+----
+public void configure(EntitiesConfigurationBuilder entities){
+    entities.withType(Project.class)
+            // register the 'project' AclPermissionsForm on the Project EntityConfiguration
+            .attribute(AclPermissionsForm.ATTR_PROFILE_NAME, "project");
+}
+----
