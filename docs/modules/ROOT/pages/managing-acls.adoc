@@ -2,7 +2,7 @@
 
 [[acl-security-service]]
 == AclSecurityService
-The link:{module-javadoc-url}/com/foreach/across/modules/spring/security/acl/services/AclSecurityService.html[`AclSecurityService`] provides an abstraction layer for working with ACLs for IdBasedEntities.
+The `AclSecurityService` provides an abstraction layer for working with ACLs for IdBasedEntities.
 
 [#default-parent-acl]
 == Default parent ACL
@@ -11,7 +11,7 @@ that owns the ACL).  The default parent is attached to any newly created ACL tha
 specified.
 
 == IdBasedEntityAclInterceptor
-{module-name} provides a custom interceptor that provides a few utility methods to handle ACLs for `IdBasedEntity` types.
+SpringSecurityAclModule provides a custom interceptor that provides a few utility methods to handle ACLs for `IdBasedEntity` types.
 These are primarily used to create an ACL when an object of a certain type is created, as well as providing access to the object for the necessary security entities by defaul.
 
 .Creating a custom Acl interceptor.

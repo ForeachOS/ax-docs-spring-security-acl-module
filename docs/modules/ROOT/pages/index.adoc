@@ -6,5 +6,5 @@ seamlessly integrating with other standard modules.
 
 ACLs define which security entities have access to a certain object or type through the use of Access Control Entries (ACE).
 An ACE defines access for a single <<known-acl-permissions,acl permission>> for a certain `Sid`, which represents the security entity.
-{module-name} provides an `Sid` implementation for working with `GrantedAuthority` and `SecurityPrincipal`, which are `GrantedAuthoritySid` and `SecurityPrincipalSid` respectively.
+SpringSecurityAclModule provides an `Sid` implementation for working with `GrantedAuthority` and `SecurityPrincipal`, which are `GrantedAuthoritySid` and `SecurityPrincipalSid` respectively.
 When creating an ACL, the current authentication will be set as it's owner and will be the default manager of the ACL for that object.

@@ -16,7 +16,7 @@ Usually of the form *EntityPrefix*.views[*viewName*]. +
 The *viewName* is the name of the ACL permissions form view.
 Usually this is `aclPermissions` when using the `AclPermissionsFormRegistry`. +
 +
-Please refer to the link:{entity-module-url}[EntityModule] documentation for the generated values of *EntityPrefix*.
+Please refer to the link:{url-EntityModule}[EntityModule] documentation for the generated values of *EntityPrefix*.
 
 *formName*::
 Value of the `name` property configured on the `AclPermissionsForm`.
