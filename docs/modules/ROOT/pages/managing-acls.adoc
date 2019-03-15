@@ -71,7 +71,7 @@ void registerAclPermissionsForm(AclPermissionsFormRegistry formRegistry){
                 // permissions that should be shown in this group
                 .permissions(AclPermission.CREATE, AclPermission.READ, AclPermission.WRITE, AclPermission.DELETE)
                 .build(),
-            permissionsGroup("administration")
+            permissionGroup("administration")
                 .permissions(AclPermission.ADMINISTRATION)
                 .build()
         ).build();
