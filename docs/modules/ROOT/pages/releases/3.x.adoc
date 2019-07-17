@@ -14,7 +14,5 @@
 ** the 5 default permissions take up half of these positions
 ** applications or non-shared modules should create custom permissions on the positions > 10
 * `AclPermission` has some helper methods for easily creating custom permissions: `create()` and `combine()`, with validation regarding the reserved bit range
-* TODO: AclPermissionForm
-** registry for registration
-** ObjectIdentity.class.getName() attribute for custom identity resolver
-** the auto generated ACL permissions management view uses several <<acl-permissions-form-message-codes,message codes>> for its labels
+* added support for defining xref:managing-acls.adoc#acl-form[custom forms for managing ACL permissions] using EntityModule
+

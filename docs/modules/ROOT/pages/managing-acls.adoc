@@ -49,6 +49,7 @@ class ProjectAclInterceptor extends IdBasedEntityAclInterceptor<Project> {
 //
 //AllowableActionsMapper
 
+[#acl-form]
 == Configuring an ACL form
 
 To create an ACL form through which users can manage ACL's from the back-end of the application, one has to register a form on the AclPermissionFormRegistry and add that form to the EntityConfigurationBuilder of your entity.
@@ -95,3 +96,5 @@ public void configure(EntitiesConfigurationBuilder entities){
             .attribute(AclPermissionsForm.ATTR_PROFILE_NAME, "project");
 }
 ----
+
+xref:message-codes.adoc[Specific message codes] can be used to customize the labels shown on an ACL permissions form.
