@@ -1,5 +1,5 @@
 name: spring-security-acl-module
 title: "Module: Security - ACLs"
-version: 3.0.2
+version: master
 nav:
 - modules/ROOT/nav.adoc
