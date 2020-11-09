@@ -1,7 +1,16 @@
 = 4.x.x release notes
 
+[#4-1-0]
+== 4.1.0.RELEASE
+
+* Removed postgres workaround in `SecurityPrincipalJdbcAclService`
+* Replaced `jdbcTemplate` by `jdbcOperation` in `SecurityPrincipalJdbcAclService`
+* Fix SpringSecurityAclModule not booting without BootstrapUiModule
+* Switched to JUnit5
+
 [#4-0-0]
 == 4.0.0.RELEASE
+
 * *Requires Across 5.0.1.*
 * Spring upgrade related changes
 * Defines the following icon sets:
