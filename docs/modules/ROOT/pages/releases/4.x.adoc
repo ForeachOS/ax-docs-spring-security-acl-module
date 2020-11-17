@@ -1,5 +1,9 @@
 = 4.x.x release notes
 
+[#4-0-1]
+== 4.0.1.RELEASE
+* Fixes an issue where Spring Security Acl Module could not work without Bootstrap UI Module
+
 [#4-0-0]
 == 4.0.0.RELEASE
 * *Requires Across 5.0.1.*
